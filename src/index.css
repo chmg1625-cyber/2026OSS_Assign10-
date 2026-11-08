@@ -43,12 +43,12 @@ button:hover {
   font-size: 32px;
   line-height: 37px;
   text-align: center;
-  color: #293264;
+  color: #db5b20;
 }
 .intro--description{
   z-index: 1;
   font-family: 'Inter',sans-serif;
-  color: #293264;
+  color: #855414;
   max-width: 50%;
   text-align: center;
 }
@@ -61,7 +61,7 @@ button:hover {
   /* button */
   width: 200px;
   height: 50px;
-  background: #4D5B9E;
+  background: #e99c37;
   border-radius: 15px;
   /* text */    
   font-family: 'Inter',sans-serif;
@@ -69,6 +69,15 @@ button:hover {
   line-height: 19px;
   color: #F5F7FB; 
   border: none;
+}
+.intro--mode-buttons{
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.intro--endless{
+  background: #c06214;
 }
 
 .loading--container{
@@ -112,7 +121,7 @@ button:hover {
   width: 120px;
   min-height: 35px;
   margin-top:5px;
-  background: #4D5B9E;
+  background: #f0852e;
   border-radius: 10px;
   border: none;
   /* text */    
@@ -134,7 +143,7 @@ button:hover {
   font-family: 'Inter',sans-serif;
   font-size: 12.8px;
   line-height: 15px;
-  color: #293264;
+  color: #c06214;
 }
 
 
@@ -151,18 +160,18 @@ button:hover {
   font-family: 'Karla',sans-serif;
   font-size: 16px;
   line-height: 19px;
-  color: #293264;
+  color: #fc912d;
 }
 .question--line{
   margin-top: 15px;
-  border: 0.8px solid #DBDEF0;
+  border: 0.8px solid #beaa8f;
 }
 .answer{
   /* button */
   padding: 3.5px 8px;
   min-width: 66px;
   min-height: 20px;
-  border: 0.8px solid #4D5B9E;
+  border: 0.8px solid #e79519;
   border-radius: 8px;
   background: transparent;
   /* text */
@@ -170,24 +179,24 @@ button:hover {
   font-weight: 500;
   font-size: 10px;
   line-height: 12px;
-  color: #293264;
+  color: #d36600;
 }
 
 .answer--selected{
-  background: #D6DBF5;
+  background: #ebd5c1;
   border: none;
 }
 .questions--ended .answer{
   opacity: 0.5;
 }
 .questions--ended .answer--selected.answer--incorrect{
-  background: #F8BCBC;
+  background: #ec9b9b;
   border: none;
   
 }
 .questions--ended .answer--correct{
   opacity: 1;
   border: none;    
-  background: #94D7A2;
+  background: #e9a347;
 }
 

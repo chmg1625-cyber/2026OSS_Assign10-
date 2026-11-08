@@ -8,12 +8,12 @@ import parse from 'html-react-parser'
 
 
 export default function App(){
-    const API_URL="https://opentdb.com/api.php?amount=5&type=multiple"
-    
     const [started, setStarted] = React.useState(false)
     const [ended, setEnded]= React.useState(false)
     const [questions, setQuestions] = React.useState([])
     const [isLoading, setIsLoading]= React.useState(false)
+    const [endless, setEndless] = React.useState(false)
+    const [endlessQuestionBank, setEndlessQuestionBank] = React.useState([])
     
     React.useEffect(()=>{
         getQuestions()
@@ -36,16 +36,30 @@ export default function App(){
             )
         )
     }
-    async function getQuestions(){
-        setIsLoading(true)        
-        const res = await fetch(API_URL)
+    async function getQuestions(amount = 5){
+        setIsLoading(true)
+        const res = await fetch(`https://opentdb.com/api.php?amount=${amount}&type=multiple`)
         const data = await res.json()
-        setQuestions(processQuestons(data.results))
-        setIsLoading(false)        
+        const processedQuestions = processQuestons(data.results)
+        setQuestions(processedQuestions)
+        if (amount === 50) setEndlessQuestionBank(processedQuestions)
+        setIsLoading(false)
+    }
+
+    function startGame(isEndless){
+        setEndless(isEndless)
+        setStarted(true)
+        getQuestions(isEndless ? 50 : 5)
+    }
+
+    function nextEndlessQuestion(){
+        const choices = endlessQuestionBank.filter(question => question.id !== questions[0]?.id)
+        const nextQuestion = choices[Math.floor(Math.random() * choices.length)]
+        setQuestions([nextQuestion])
     }
         
     async function restart(){
-        getQuestions()
+        getQuestions(endless ? 50 : 5)
         setEnded(false)
     }
  
@@ -56,9 +70,11 @@ export default function App(){
                         <QuestionsPage 
                             questions={questions}
                             restart={restart}
+                            endless={endless}
+                            nextEndlessQuestion={nextEndlessQuestion}
                             ended={ended}
                             end={()=> setEnded(true)} /> :
-                    <IntroPage start={()=>setStarted(true)} />
+                    <IntroPage start={startGame} />
     
     return page
 }

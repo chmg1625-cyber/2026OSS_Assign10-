@@ -6,12 +6,14 @@ export default function Question(props){
     
     React.useEffect(()=>{props.setCorrect(selectedAnswer.correct)},[selectedAnswer])
     function changeAnswer(selectedId){
+        if (props.disabled) return
         if(selectedAnswer.id === selectedId){
             setSelectedAnswer({id:0,correct:false})
-        }else
-        setSelectedAnswer(
-            props.answers.find(({id})=>id===selectedId)
-        )
+            return
+        }
+        const answer = props.answers.find(({id})=>id===selectedId)
+        setSelectedAnswer(answer)
+        if (props.endless) props.onEndlessAnswer(answer.correct)
     }
     
     const answerElements = props.answers.map(answer => 
